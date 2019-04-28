@@ -7,8 +7,8 @@ const client = FS.client(function() {
   });
 
   this.onceAsync("CHANNEL_HANGUP").then(function(call) {
-    //console.log("Call hangup");
-    //console.log(call);
+    console.log("Call hangup \r\n");
+    console.log(call);
   });
 
   this.onceAsync("CHANNEL_CREATE").then(function(call) {
@@ -34,7 +34,7 @@ const client = FS.client(function() {
   this.event_json(
     //"CHANNEL_ANSWER",
     "CHANNEL_CREATE",
-    //"CHANNEL_HANGUP",
+    "CHANNEL_HANGUP",
     "CHANNEL_HANGUP_COMPLETE"
     //"SOME_MESSAGE"
   );
