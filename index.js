@@ -11,7 +11,7 @@ const client = FS.client(function() {
     //console.log(call);
   });
 
-  this.onceAsync("CHANNEL_CREATE").then(function(call) {
+  this.on("CHANNEL_CREATE").then(function(call) {
     console.log("Channel Create \r\n");
 
     console.log(call.body["Call-Direction"]);
