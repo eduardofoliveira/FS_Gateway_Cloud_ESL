@@ -2,8 +2,8 @@ FS = require("esl");
 
 const client = FS.client(function() {
   this.onceAsync("CHANNEL_ANSWER").then(function(call) {
-    console.log("Call was answered \r\n");
-    console.log(call);
+    //console.log("Call was answered \r\n");
+    //console.log(call);
   });
 
   this.onceAsync("CHANNEL_HANGUP").then(function(call) {
@@ -13,12 +13,15 @@ const client = FS.client(function() {
 
   this.onceAsync("CHANNEL_CREATE").then(function(call) {
     console.log("Channel Create \r\n");
-    console.log(call);
+
+    if (call.body["Call-Direction"] === "outbound") {
+      console.log(call);
+    }
   });
 
   this.onceAsync("CHANNEL_HANGUP_COMPLETE").then(function(call) {
-    console.log("Call was disconnected \r\n");
-    console.log(call);
+    //console.log("Call was disconnected \r\n");
+    //console.log(call);
   });
 
   this.on("SOME_MESSAGE", function(call) {
@@ -27,10 +30,10 @@ const client = FS.client(function() {
   });
 
   this.event_json(
-    "CHANNEL_ANSWER",
-    "CHANNEL_CREATE",
+    //"CHANNEL_ANSWER",
+    "CHANNEL_CREATE"
     //"CHANNEL_HANGUP",
-    "CHANNEL_HANGUP_COMPLETE"
+    //"CHANNEL_HANGUP_COMPLETE"
     //"SOME_MESSAGE"
   );
 });
