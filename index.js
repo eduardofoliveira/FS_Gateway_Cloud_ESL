@@ -12,15 +12,27 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
     "CHANNEL_DESTROY"
   ]);
 
-  conn.on("esl::event::CHANNEL_CREATE::*", function(call) {
-    console.log(call);
+  conn.on("esl::event::CHANNEL_CREATE::*", evento => {
+    const chamada = {
+      callid: event.getHeader("Channel-Call-UUID"),
+      from: event.getHeader("Caller-Caller-ID-Number"),
+      to: event.getHeader("Caller-Destination-Number")
+    };
+
+    console.log("Chamada iniciada: ");
+    console.log(chamada);
+    console.log("");
   });
 
-  conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", function(call) {
-    console.log(call);
-  });
+  conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", evento => {
+    const chamada = {
+      callid: event.getHeader("Channel-Call-UUID"),
+      from: event.getHeader("Caller-Caller-ID-Number"),
+      to: event.getHeader("Caller-Destination-Number")
+    };
 
-  conn.on("esl::event::**::**", function(call) {
-    console.log(call);
+    console.log("Chamada finalizada: ");
+    console.log(chamada);
+    console.log("");
   });
 });
