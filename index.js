@@ -13,26 +13,30 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
   ]);
 
   conn.on("esl::event::CHANNEL_CREATE::*", evento => {
-    const chamada = {
-      callid: evento.getHeader("Channel-Call-UUID"),
-      from: evento.getHeader("Caller-Caller-ID-Number"),
-      to: evento.getHeader("Caller-Destination-Number")
-    };
+    if (evento.getHeader("Call-Direction") === "outbound") {
+      const chamada = {
+        callid: evento.getHeader("Channel-Call-UUID"),
+        from: evento.getHeader("Caller-Caller-ID-Number"),
+        to: evento.getHeader("Caller-Destination-Number")
+      };
 
-    console.log("Chamada iniciada: ");
-    console.log(chamada);
-    console.log("");
+      console.log("Chamada iniciada: ");
+      console.log(chamada);
+      console.log("");
+    }
   });
 
   conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", evento => {
-    const chamada = {
-      callid: evento.getHeader("Channel-Call-UUID"),
-      from: evento.getHeader("Caller-Caller-ID-Number"),
-      to: evento.getHeader("Caller-Destination-Number")
-    };
+    if (evento.getHeader("Call-Direction") === "outbound") {
+      const chamada = {
+        callid: evento.getHeader("Channel-Call-UUID"),
+        from: evento.getHeader("Caller-Caller-ID-Number"),
+        to: evento.getHeader("Caller-Destination-Number")
+      };
 
-    console.log("Chamada finalizada: ");
-    console.log(chamada);
-    console.log("");
+      console.log("Chamada finalizada: ");
+      console.log(chamada);
+      console.log("");
+    }
   });
 });
