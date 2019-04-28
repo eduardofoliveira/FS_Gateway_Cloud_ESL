@@ -1,5 +1,7 @@
 const esl = require("modesl");
 
+let lista = [];
+
 conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
   conn.events("json", "all");
 
@@ -20,6 +22,8 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
         to: evento.getHeader("Caller-Destination-Number")
       };
 
+      lista[callid] = { from, to };
+
       console.log("Chamada iniciada: ");
       console.log(chamada);
       console.log("");
@@ -34,9 +38,13 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
         to: evento.getHeader("Caller-Destination-Number")
       };
 
+      delete lista[callid];
+
       console.log("Chamada finalizada: ");
       console.log(chamada);
       console.log("");
+
+      console.log(lista);
     }
   });
 });
