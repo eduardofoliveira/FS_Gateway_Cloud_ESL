@@ -2,8 +2,8 @@ FS = require("esl");
 
 const client = FS.client(function() {
   this.onceAsync("CHANNEL_ANSWER").then(function(call) {
-    //console.log("Call was answered \r\n");
-    //console.log(call);
+    console.log("Call was answered \r\n");
+    console.log(call);
   });
 
   this.onceAsync("CHANNEL_HANGUP").then(function(call) {
@@ -27,16 +27,16 @@ const client = FS.client(function() {
   });
 
   this.on("SOME_MESSAGE", function(call) {
-    //console.log("Got Some Message");
-    //console.log(call);
+    console.log("Got Some Message");
+    console.log(call);
   });
 
   this.event_json(
-    //"CHANNEL_ANSWER",
+    "CHANNEL_ANSWER",
     "CHANNEL_CREATE",
     "CHANNEL_HANGUP",
-    "CHANNEL_HANGUP_COMPLETE"
-    //"SOME_MESSAGE"
+    "CHANNEL_HANGUP_COMPLETE",
+    "SOME_MESSAGE"
   );
 });
 
