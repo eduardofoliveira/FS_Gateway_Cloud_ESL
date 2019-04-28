@@ -8,11 +8,13 @@ const removerChamadaDaLista = id => {
       chamadas_ativas.splice(index, 1);
     }
   }
+  console.log(`Chamada com ID: ${id} removida`);
 };
 
 const contemNaLista = id => {
   for (let index = 0; index < chamadas_ativas.length; index++) {
     if (chamadas_ativas[index].callid === id) {
+      console.log(`Chamada com ID: ${id} já esta na lista`);
       return true;
     }
   }
@@ -40,11 +42,11 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
 
       if (!contemNaLista(chamada.callid)) {
         chamadas_ativas.push(chamada);
-      }
 
-      console.log("Chamada iniciada: ");
-      console.log(chamada);
-      console.log("");
+        console.log("Chamada Adicionada");
+        console.log(chamada);
+        console.log("");
+      }
     }
   });
 
@@ -57,14 +59,11 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
       };
 
       removerChamadaDaLista(chamada.callid);
-
-      console.log("Chamada finalizada: ");
-      console.log(chamada);
-      console.log("");
     }
   });
 });
 
 setInterval(() => {
+  console.log("Chamadas Ativas");
   console.log(chamadas_ativas);
 }, 10000);
