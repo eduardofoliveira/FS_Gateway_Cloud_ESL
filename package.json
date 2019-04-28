@@ -1,0 +1,20 @@
+{
+  "name": "FS_Gateway_Cloud_Esl",
+  "version": "1.0.0",
+  "description": "Middleware para verificação de chamadas ativas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Basix",
+    "Cloudcom",
+    "Freeswtich",
+    "esl"
+  ],
+  "author": "Eduardo Felipe de Oliveira<eduardo_felipe_oliveira@yahoo.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "esl": "^9.0.1"
+  }
+}
