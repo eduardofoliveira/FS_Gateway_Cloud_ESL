@@ -17,7 +17,10 @@ const server = http.createServer((req, res) => {
   if (retorno) {
     let [, , from, to, username, domain, call_id, method] = retorno;
 
-    to = getDestinationCall(from);
+    realTo = getDestinationCall(from);
+    if (realTo) {
+      to = realTo;
+    }
 
     api.get(
       `/chamada/${from}/${to}/${username}/${domain}/${call_id}/${method}`
