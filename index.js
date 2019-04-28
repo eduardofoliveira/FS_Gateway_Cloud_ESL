@@ -1,7 +1,7 @@
 FS = require("esl");
 
-const client = FS.client(function() {
-  this.once("CHANNEL_ANSWER", call => {
+const client = FS.client({ all_events: false }, function() {
+  this.onceAsync("CHANNEL_ANSWER", call => {
     console.log("Call was answered \r\n");
     console.log(call);
   });
