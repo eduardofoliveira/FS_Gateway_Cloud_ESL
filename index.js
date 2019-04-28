@@ -14,9 +14,9 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
 
   conn.on("esl::event::CHANNEL_CREATE::*", evento => {
     const chamada = {
-      callid: event.getHeader("Channel-Call-UUID"),
-      from: event.getHeader("Caller-Caller-ID-Number"),
-      to: event.getHeader("Caller-Destination-Number")
+      callid: evento.getHeader("Channel-Call-UUID"),
+      from: evento.getHeader("Caller-Caller-ID-Number"),
+      to: evento.getHeader("Caller-Destination-Number")
     };
 
     console.log("Chamada iniciada: ");
@@ -26,9 +26,9 @@ conn = new esl.Connection("127.0.0.1", 8021, "ClueCon", function() {
 
   conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", evento => {
     const chamada = {
-      callid: event.getHeader("Channel-Call-UUID"),
-      from: event.getHeader("Caller-Caller-ID-Number"),
-      to: event.getHeader("Caller-Destination-Number")
+      callid: evento.getHeader("Channel-Call-UUID"),
+      from: evento.getHeader("Caller-Caller-ID-Number"),
+      to: evento.getHeader("Caller-Destination-Number")
     };
 
     console.log("Chamada finalizada: ");
