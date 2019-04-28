@@ -1,4 +1,31 @@
+const http = require("http");
 const esl = require("modesl");
+const axios = require("axios");
+
+const api = axios.create({
+  baseURL: "http://contact.cloudcom.com.br"
+});
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("");
+
+  //chamada/11999683333/551137115000/Eduardo/cloud.cloudcom.com.br/gfjdghkd55dkjhfd/RINGING
+
+  const padrao = /\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)/;
+  const retorno = padrao.exec(req.url);
+  if (retorno) {
+    let [, , from, to, username, domain, call_id, method] = retorno;
+
+    to = getDestinationCall(from);
+
+    api.get(
+      `/chamada/${from}/${to}/${username}/${domain}/${call_id}/${method}`
+    );
+  }
+});
+
+server.listen(80);
 
 let chamadas_ativas = [];
 
@@ -16,6 +43,14 @@ const contemNaLista = id => {
     if (chamadas_ativas[index].callid === id) {
       console.log(`Chamada com ID: ${id} já esta na lista`);
       return true;
+    }
+  }
+};
+
+const getDestinationCall = from => {
+  for (let index = 0; index < chamadas_ativas.length; index++) {
+    if (chamadas_ativas[index].from === from) {
+      return chamadas_ativas[index].to;
     }
   }
 };
