@@ -14,7 +14,7 @@ const client = FS.client(function() {
   this.onceAsync("CHANNEL_CREATE").then(function(call) {
     console.log("Channel Create \r\n");
 
-    console.log(call.body);
+    console.log(call.body["Call-Direction"]);
 
     //if (call.body["Call-Direction"] === "outbound") {
     //  console.log(call);
