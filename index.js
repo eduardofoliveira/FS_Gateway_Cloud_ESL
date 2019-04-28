@@ -2,19 +2,19 @@ FS = require("esl");
 
 const client = FS.client(function() {
   this.onceAsync("CHANNEL_ANSWER").then(function() {
-    util.log("Call was answered");
+    console.log("Call was answered");
   });
 
   this.onceAsync("CHANNEL_HANGUP").then(function() {
-    util.log("Call hangup");
+    console.log("Call hangup");
   });
 
   this.onceAsync("CHANNEL_HANGUP_COMPLETE").then(function() {
-    util.log("Call was disconnected");
+    console.log("Call was disconnected");
   });
 
   this.on("SOME_MESSAGE", function(call) {
-    util.log("Got Some Message");
+    console.log("Got Some Message");
   });
 
   this.event_json(
