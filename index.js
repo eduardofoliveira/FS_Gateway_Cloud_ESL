@@ -14,9 +14,11 @@ const client = FS.client(function() {
   this.onceAsync("CHANNEL_CREATE").then(function(call) {
     console.log("Channel Create \r\n");
 
-    if (call.body["Call-Direction"] === "outbound") {
-      console.log(call);
-    }
+    console.log(call.body);
+
+    //if (call.body["Call-Direction"] === "outbound") {
+    //  console.log(call);
+    //}
   });
 
   this.onceAsync("CHANNEL_HANGUP_COMPLETE").then(function(call) {
