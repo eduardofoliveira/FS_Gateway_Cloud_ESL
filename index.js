@@ -4,11 +4,13 @@ const client = FS.client(function() {
   this.onceAsync("CHANNEL_ANSWER").then(function(call) {
     console.log("Call was answered \r\n");
     console.log(call);
+    return;
   });
 
   this.onceAsync("CHANNEL_HANGUP").then(function(call) {
     console.log("Call hangup \r\n");
     console.log(call);
+    return;
   });
 
   this.onceAsync("CHANNEL_CREATE").then(function(call) {
@@ -19,16 +21,19 @@ const client = FS.client(function() {
     //if (call.body["Call-Direction"] === "inbound") {
     //  console.log(call);
     //}
+    return;
   });
 
   this.onceAsync("CHANNEL_HANGUP_COMPLETE").then(function(call) {
     console.log("Call was disconnected \r\n");
     console.log(call);
+    return;
   });
 
   this.on("SOME_MESSAGE", function(call) {
     console.log("Got Some Message");
     console.log(call);
+    return;
   });
 
   this.event_json(
