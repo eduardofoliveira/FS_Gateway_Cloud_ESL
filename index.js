@@ -3,7 +3,7 @@ const esl = require("modesl");
 const axios = require("axios");
 
 const api = axios.create({
-  baseURL: "http://contact.cloudcom.com.br"
+  baseURL: "http://35.171.122.245:83"
 });
 
 waitTime = 20000;
