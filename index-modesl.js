@@ -18,8 +18,6 @@ let doConnect = () => {
     let padrao = /\/(chamada)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)/;
     const retorno = padrao.exec(req.url);
 
-    console.log(retorno);
-
     if (retorno) {
       let [, , from, to, username, domain, call_id, method] = retorno;
 
@@ -29,6 +27,20 @@ let doConnect = () => {
       }
 
       api.get(`/identificacao/${from}/${to}/${username}/${domain}/${call_id}/${method}`);
+    }
+
+    padrao = /\/(ura)\/(.*)\/(.*)\/(.*)\/(.*)/;
+    const retorno = padrao.exec(req.url);
+
+    if (retorno) {
+      let [, , from, to, username, domain] = retorno;
+
+      realTo = getDestinationCall(from);
+      if (realTo) {
+        to = realTo;
+      }
+
+      api.get(`/ura/${from}/${to}/${username}/${domain}`);
     }
   });
 
