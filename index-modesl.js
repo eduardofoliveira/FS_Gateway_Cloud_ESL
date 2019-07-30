@@ -15,7 +15,7 @@ let doConnect = () => {
 
     //chamada/11999683333/551137115000/Eduardo/cloud.cloudcom.com.br/gfjdghkd55dkjhfd/RINGING
 
-    let padrao = /\/chamada\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)/;
+    let padrao = /\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)/;
     const retorno = padrao.exec(req.url);
     if (retorno) {
       let [, , from, to, username, domain, call_id, method] = retorno;
