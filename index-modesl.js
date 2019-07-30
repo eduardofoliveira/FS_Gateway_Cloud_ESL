@@ -41,6 +41,7 @@ let doConnect = () => {
         to = realTo;
       }
 
+      console.log(`/ura/${from}/${to}/${username}/${domain}`);
       api.get(`/ura/${from}/${to}/${username}/${domain}`);
     }
   });
