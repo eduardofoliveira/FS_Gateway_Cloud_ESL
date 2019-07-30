@@ -3,7 +3,7 @@ const esl = require("modesl");
 const axios = require("axios");
 
 const api = axios.create({
-  baseURL: "http://35.171.122.245:83"
+  baseURL: "http://127.0.0.1:81"
 });
 
 waitTime = 20000;
@@ -15,7 +15,7 @@ let doConnect = () => {
 
     //chamada/11999683333/551137115000/Eduardo/cloud.cloudcom.com.br/gfjdghkd55dkjhfd/RINGING
 
-    const padrao = /\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)/;
+    let padrao = /\/chamada\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)/;
     const retorno = padrao.exec(req.url);
     if (retorno) {
       let [, , from, to, username, domain, call_id, method] = retorno;
@@ -25,9 +25,7 @@ let doConnect = () => {
         to = realTo;
       }
 
-      api.get(
-        `/chamada/${from}/${to}/${username}/${domain}/${call_id}/${method}`
-      );
+      api.get(`/identificacao/${from}/${to}/${username}/${domain}/${call_id}/${method}`);
     }
   });
 

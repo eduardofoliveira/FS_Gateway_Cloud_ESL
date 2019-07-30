@@ -15,7 +15,8 @@
   "author": "Eduardo Felipe de Oliveira<eduardo_felipe_oliveira@yahoo.com.br>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
+    "express": "^4.17.1",
     "modesl": "^1.2.0"
   }
 }
