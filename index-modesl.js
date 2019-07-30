@@ -36,6 +36,7 @@ let doConnect = () => {
       let [, , from, to, username, domain] = retorno;
 
       realTo = getDestinationCall(from);
+      console.log(from, to, realTo);
       if (realTo) {
         to = realTo;
       }
