@@ -33,6 +33,10 @@ app.get(`/identificacao/:from/:to/:username/:domain/:call_id/:method`, (req, res
 
     api.get(`/chamada/${from}/${to}/${username}/${domain}/${call_id}/${method}`);
   }
+
+  if (method === "HELD") {
+    api.get(`/chamada/${from}/${to}/${username}/${domain}/${call_id}/DISCONNECTED`);
+  }
 });
 
 app.get(`/ura/:from/:to/:opcao/:domain`, (req, res) => {
