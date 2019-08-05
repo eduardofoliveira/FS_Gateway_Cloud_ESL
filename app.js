@@ -30,6 +30,8 @@ app.get(`/identificacao/:from/:to/:username/:domain/:call_id/:method`, (req, res
     navegacaoUra = navegacaoUra.filter(item => {
       return item.from !== from && item.to !== to;
     });
+
+    api.get(`/chamada/${from}/${to}/${username}/${domain}/${call_id}/${method}`);
   }
 });
 
