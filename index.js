@@ -7,27 +7,21 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
   const { from, user, domain, callid, method } = req.params;
   let { to } = req.params;
 
-
-  console.log(Object.keys(lista))
-
-  let detalhe = Object.keys(lista).filter(item => {
-    console.log(item)
-    console.log(lista[item])
+  let [detalhe] = Object.keys(lista).filter(item => {
     if(lista[item].from === from && lista[item].domain === domain){
       return true
     }
     return false
   })
 
-  // let [detalhe] = lista.filter((item) => {
-  //   item.from === from && item.domain === domain
-  // })
+  if(detalhe){
+    to = lista[detalhe].to
+  }
 
   console.log(from, user, domain, callid, method)
   console.log(to)
-  console.log(detalhe)
+  console.log(lista[detalhe])
 
-  to = detalhe.to
   res.send()
 })
 
@@ -82,7 +76,9 @@ connector.on('create', chamada => {
 })
 
 connector.on('hangup', chamada => {
-  delete lista[chamada.callid]
+  setTimeout(() => {
+    delete lista[chamada.callid]
+  }, 5000)
 })
 
 // setInterval(() => {
