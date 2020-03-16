@@ -16,15 +16,15 @@ connector.on('create', chamada => {
       to: chamada.to,
     }
 
-    if(!lista[chamada.callid]){
-      const result = api.get(`/api/basix/domain/${chamada.to}`)
-      result.then(data => {
-        if(lista[chamada.callid]){
-          lista[chamada.callid].domain = data.data.domain
-          console.log(data.data.domain)
-        }
-      })
-    }
+    // if(!lista[chamada.callid]){
+    const result = api.get(`/api/basix/domain/${chamada.to}`)
+    result.then(data => {
+      if(lista[chamada.callid]){
+        lista[chamada.callid].domain = data.data.domain
+        console.log(data.data.domain)
+      }
+    })
+    // }
   }
 })
 
