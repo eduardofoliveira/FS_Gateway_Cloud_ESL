@@ -11,6 +11,8 @@ app.get(`chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
     item.from === from && item.domain === domain
   })
 
+  console.log(from, user, domain, callid, method)
+  console.log(to)
   console.log(detalhe)
 
   to = detalhe.to
@@ -25,6 +27,8 @@ app.get(`ura/:from/:to/:user/:domain`, (req, res) => {
     item.from === from && item.domain === domain
   })
 
+  console.log(from, user, domain, callid, method)
+  console.log(to)
   console.log(detalhe)
 
   to = detalhe.to
