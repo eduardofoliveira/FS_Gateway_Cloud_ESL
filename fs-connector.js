@@ -10,7 +10,7 @@ let doConnect = () => {
 
     conn.subscribe(["CHANNEL_CREATE", "CHANNEL_HANGUP_COMPLETE", "disconnect"]);
 
-    conn.on("esl::event::CHANNEL_CREATE::*", async evento => {
+    conn.on("esl::event::CHANNEL_CREATE::*", evento => {
       if (
         evento.getHeader("Call-Direction") === "outbound" //&&
         //evento.getHeader("Caller-Network-Addr") == "54.233.223.179"

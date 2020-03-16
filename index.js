@@ -8,7 +8,7 @@ let lista = {}
 let lastCallId = ''
 
 connector.on('create', chamada => {
-  if(lastCallId !== chamada.callid){
+  //if(lastCallId !== chamada.callid){
     lastCallId = chamada.callid
 
     lista[chamada.callid] = {
@@ -27,7 +27,7 @@ connector.on('create', chamada => {
     // .catch(erro => {
     //   console.log(`erro ao adicionar dominio no callid: ${chamada.callid}`)
     // })
-  }
+  //}
 })
 
 connector.on('hangup', chamada => {
