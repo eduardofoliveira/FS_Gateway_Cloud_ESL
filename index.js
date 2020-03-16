@@ -11,17 +11,19 @@ connector.on('create', chamada => {
   if(lastCallId !== chamada.callid){
     lastCallId = chamada.callid
 
+    lista[chamada.callid] = {
+      from: chamada.from,
+      to: chamada.to,
+    }
+
     if(!lista[chamada.callid]){
       const result = api.get(`/api/basix/domain/${chamada.to}`)
       result.then(data => {
-        lista[chamada.callid].domain = data.data.domain
-        console.log(data.data.domain)
+        if(lista[chamada.callid]){
+          lista[chamada.callid].domain = data.data.domain
+          console.log(data.data.domain)
+        }
       })
-      
-      lista[chamada.callid] = {
-        from: chamada.from,
-        to: chamada.to,
-      }
     }
   }
 })
