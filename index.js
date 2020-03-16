@@ -16,11 +16,14 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
 
   if(detalhe){
     to = lista[detalhe].to
+    lista[detalhe].callid_basix = callid
   }
 
-  console.log(from, user, domain, callid, method)
-  console.log(to)
-  console.log(lista[detalhe])
+  // console.log(from, user, domain, callid, method)
+  // console.log(to)
+  // console.log(lista[detalhe])
+
+  axios.get(`http://35.171.122.245:83/chamada/${from}/${to}/${user}/${domain}/${callid}/${method}`)
 
   res.send()
 })
