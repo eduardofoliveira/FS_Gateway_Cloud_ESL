@@ -79,7 +79,7 @@ connector.on('create', chamada => {
     .then(data => {
       if(lista[chamada.callid]){
         lista[chamada.callid].domain = data.data.domain
-        console.log(data.data.domain)
+        //console.log(data.data.domain)
       }
     })
     .catch(erro => {
