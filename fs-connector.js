@@ -12,9 +12,11 @@ let doConnect = () => {
 
     conn.on("esl::event::CHANNEL_CREATE::*", async evento => {
       if (
-        evento.getHeader("Call-Direction") === "outbound" &&
-        evento.getHeader("Caller-Network-Addr") == "54.233.223.179"
+        evento.getHeader("Call-Direction") === "outbound" //&&
+        //evento.getHeader("Caller-Network-Addr") == "54.233.223.179"
         ) {
+
+        console.log(evento.getHeader("Caller-Network-Addr"))
 
         let chamada = {
           callid: evento.getHeader("Channel-Call-UUID"),
