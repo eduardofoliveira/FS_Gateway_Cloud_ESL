@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const port = 80
 
-app.get(`chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
+app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
   const { from, user, domain, callid, method } = req.params;
   let { to } = req.params;
 
@@ -19,7 +19,7 @@ app.get(`chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
   res.send()
 })
 
-app.get(`ura/:from/:to/:user/:domain`, (req, res) => {
+app.get(`/ura/:from/:to/:user/:domain`, (req, res) => {
   const { from, user, domain } = req.params;
   let { to } = req.params;
 
