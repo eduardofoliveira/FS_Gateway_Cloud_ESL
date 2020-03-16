@@ -7,9 +7,13 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
   const { from, user, domain, callid, method } = req.params;
   let { to } = req.params;
 
-  let [detalhe] = lista.filter((item) => {
-    item.from === from && item.domain === domain
+  let [detalhe] = Object.keys(lista).filter(item => {
+    lista[item].from === from && lista[item].domain === domain
   })
+
+  // let [detalhe] = lista.filter((item) => {
+  //   item.from === from && item.domain === domain
+  // })
 
   console.log(from, user, domain, callid, method)
   console.log(to)
