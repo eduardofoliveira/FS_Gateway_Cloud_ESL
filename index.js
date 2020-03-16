@@ -23,24 +23,32 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
   // console.log(to)
   // console.log(lista[detalhe])
 
-  axios.get(`http://35.171.122.245:83/chamada/${from}/${to}/${user}/${domain}/${callid}/${method}`)
+  if(lista[detalhe].opcao.length > 0){
+    axios.get(`http://35.171.122.245:83/chamada/${from}/${to}/${user}/${domain}/${callid}/${method}/${lista[detalhe].opcao.join('.')}`)
+  }else{
+    axios.get(`http://35.171.122.245:83/chamada/${from}/${to}/${user}/${domain}/${callid}/${method}`)
+  }
 
   res.send()
 })
 
-app.get(`/ura/:from/:to/:user/:domain`, (req, res) => {
-  const { from, user, domain } = req.params;
+app.get(`/ura/:from/:to/:opcao/:domain`, (req, res) => {
+  const { from, opcao, domain } = req.params;
   let { to } = req.params;
 
-  let [detalhe] = lista.filter((item) => {
-    item.from === from && item.domain === domain
+  let [detalhe] = Object.keys(lista).filter(item => {
+    if(lista[item].from === from && lista[item].domain === domain){
+      return true
+    }
+    return false
   })
 
-  console.log(from, user, domain, callid, method)
-  console.log(to)
-  console.log(detalhe)
+  if(detalhe){
+    lista[detalhe].opcao.push(opcao)
+  }
+  
+  // console.log(lista[detalhe])
 
-  to = detalhe.to
   res.send()
 })
 
@@ -63,6 +71,7 @@ connector.on('create', chamada => {
     lista[chamada.callid] = {
       from: chamada.from,
       to: chamada.to,
+      opcao: []
     }
 
     const result = api.get(`/api/basix/domain/${chamada.to}`)
@@ -83,7 +92,3 @@ connector.on('hangup', chamada => {
     delete lista[chamada.callid]
   }, 5000)
 })
-
-// setInterval(() => {
-//   console.log(lista)
-// }, 5000)
