@@ -1,12 +1,21 @@
 const connector = require('./fs-connector')
+const axios = require('axios')
+const api = axios.create({
+  baseURL: 'http://35.171.122.245:85'
+})
 
 let lista = {}
 
-connector.on('create', chamada => {
-  // console.log('create: ' + JSON.stringify(chamada, null, 2))
-  lista[chamada.callid] = {
-    from: chamada.from,
-    to: chamada.to
+connector.on('create', async chamada => {
+  
+  if(!lista[chamada.callid]){
+    const { data } = await api.get(`/api/basix/domain/${chamada.to}`)
+
+    lista[chamada.callid] = {
+      from: chamada.from,
+      to: chamada.to,
+      domain: data.domain
+    }
   }
 })
 

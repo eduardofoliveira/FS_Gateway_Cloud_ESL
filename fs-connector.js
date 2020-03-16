@@ -1,10 +1,6 @@
 const esl = require("modesl");
 const { EventEmitter } = require('events')
 const em = new EventEmitter
-const axios = require('axios')
-const api = axios.create({
-  baseURL: 'http://35.171.122.245:85'
-})
 
 let waitTime = 20000;
 
@@ -25,9 +21,6 @@ let doConnect = () => {
           from: evento.getHeader("Caller-Caller-ID-Number"),
           to: evento.getHeader("Caller-Destination-Number")
         };
-
-        const { data } = await api.get(`/api/basix/domain/${chamada.to}`)
-        console.log(data)
 
         em.emit('create', chamada)
       }
