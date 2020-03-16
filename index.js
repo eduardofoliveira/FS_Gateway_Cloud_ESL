@@ -10,6 +10,7 @@ connector.on('create', async chamada => {
   
   if(!lista[chamada.callid]){
     const { data } = await api.get(`/api/basix/domain/${chamada.to}`)
+    console.log(data.domain)
 
     lista[chamada.callid] = {
       from: chamada.from,
