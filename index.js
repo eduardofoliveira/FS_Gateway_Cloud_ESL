@@ -1,11 +1,10 @@
 const connector = require('./fs-connector')
-// const axios = require('axios')
-// const api = axios.create({
-//   baseURL: 'http://35.171.122.245:85'
-// })
+const axios = require('axios')
+const api = axios.create({
+  baseURL: 'http://35.171.122.245:85'
+})
 
 let lista = {}
-let lastCallId = ''
 
 connector.on('create', chamada => {
   //if(lastCallId !== chamada.callid){
@@ -16,17 +15,17 @@ connector.on('create', chamada => {
       to: chamada.to,
     }
 
-    // const result = api.get(`/api/basix/domain/${chamada.to}`)
-    // result
-    // .then(data => {
-    //   if(lista[chamada.callid]){
-    //     lista[chamada.callid].domain = data.data.domain
-    //     console.log(data.data.domain)
-    //   }
-    // })
-    // .catch(erro => {
-    //   console.log(`erro ao adicionar dominio no callid: ${chamada.callid}`)
-    // })
+    const result = api.get(`/api/basix/domain/${chamada.to}`)
+    result
+    .then(data => {
+      if(lista[chamada.callid]){
+        lista[chamada.callid].domain = data.data.domain
+        console.log(data.data.domain)
+      }
+    })
+    .catch(erro => {
+      console.error(`erro ao adicionar dominio no callid: ${chamada.callid}`)
+    })
   //}
 })
 

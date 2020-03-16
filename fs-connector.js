@@ -16,8 +16,6 @@ let doConnect = () => {
         evento.getHeader("Caller-Network-Addr") == "54.233.223.179"
         ) {
 
-        // console.log(evento.getHeader("Caller-Network-Addr"))
-
         let chamada = {
           callid: evento.getHeader("Channel-Call-UUID"),
           from: evento.getHeader("Caller-Caller-ID-Number"),
