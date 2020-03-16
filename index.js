@@ -69,6 +69,6 @@ connector.on('hangup', chamada => {
   delete lista[chamada.callid]
 })
 
-setInterval(() => {
-  console.log(lista)
-}, 5000)
+// setInterval(() => {
+//   console.log(lista)
+// }, 5000)
