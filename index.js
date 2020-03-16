@@ -1,5 +1,45 @@
-const connector = require('./fs-connector')
 const axios = require('axios')
+const express = require('express')
+const app = express()
+const port = 80
+
+app.get(`chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
+  const { from, user, domain, callid, method } = req.params;
+  let { to } = req.params;
+
+  let [detalhe] = lista.filter((item) => {
+    item.from === from && item.domain === domain
+  })
+
+  console.log(detalhe)
+
+  to = detalhe.to
+  res.send()
+})
+
+app.get(`ura/:from/:to/:user/:domain`, (req, res) => {
+  const { from, user, domain } = req.params;
+  let { to } = req.params;
+
+  let [detalhe] = lista.filter((item) => {
+    item.from === from && item.domain === domain
+  })
+
+  console.log(detalhe)
+
+  to = detalhe.to
+  res.send()
+})
+
+app.get('status', (req, res) => {
+  res.json(lista)
+})
+
+app.listen(port, () => {
+  console.log(`App Running at port ${port}`)
+})
+
+const connector = require('./fs-connector')
 const api = axios.create({
   baseURL: 'http://35.171.122.245:85'
 })
@@ -7,9 +47,6 @@ const api = axios.create({
 let lista = {}
 
 connector.on('create', chamada => {
-  //if(lastCallId !== chamada.callid){
-    lastCallId = chamada.callid
-
     lista[chamada.callid] = {
       from: chamada.from,
       to: chamada.to,
@@ -26,7 +63,6 @@ connector.on('create', chamada => {
     .catch(erro => {
       console.error(`erro ao adicionar dominio no callid: ${chamada.callid}`)
     })
-  //}
 })
 
 connector.on('hangup', chamada => {
@@ -35,5 +71,4 @@ connector.on('hangup', chamada => {
 
 setInterval(() => {
   console.log(lista)
-  console.log('')
 }, 5000)
