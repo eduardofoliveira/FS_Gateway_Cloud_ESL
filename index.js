@@ -14,8 +14,8 @@ connector.on('create', chamada => {
     if(!lista[chamada.callid]){
       const result = api.get(`/api/basix/domain/${chamada.to}`)
       result.then(data => {
-        // lista[chamada.callid].domain = data.domain
-        console.log(data.data)
+        lista[chamada.callid].domain = data.data.domain
+        console.log(data.data.domain)
       })
       
       lista[chamada.callid] = {
