@@ -21,6 +21,7 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
 
   // console.log(from, user, domain, callid, method)
   // console.log(to)
+  console.log(detalhe)
   console.log(lista[detalhe])
 
   if(detalhe && lista[detalhe] && lista[detalhe].opcao.length > 0){
@@ -79,7 +80,6 @@ connector.on('create', chamada => {
     .then(data => {
       if(lista[chamada.callid]){
         lista[chamada.callid].domain = data.data.domain
-        //console.log(data.data.domain)
       }
     })
     .catch(erro => {
