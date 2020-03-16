@@ -6,12 +6,14 @@ const api = axios.create({
 
 let lista = {}
 
-connector.on('create', async chamada => {
-  
+connector.on('create', chamada => {
   if(!lista[chamada.callid]){
-    const { data } = await api.get(`/api/basix/domain/${chamada.to}`)
-    console.log(data.domain)
-
+    const result = api.get(`/api/basix/domain/${chamada.to}`)
+    result.then(data => {
+      lista[chamada.callid].domain = data.domain
+      console.log(data.domain)
+    })
+    
     lista[chamada.callid] = {
       from: chamada.from,
       to: chamada.to,
@@ -21,7 +23,6 @@ connector.on('create', async chamada => {
 })
 
 connector.on('hangup', chamada => {
-  // console.log('hangup: ' + JSON.stringify(chamada, null, 2))
   delete lista[chamada.callid]
 })
 
