@@ -21,8 +21,8 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
 
   // console.log(from, user, domain, callid, method)
   // console.log(to)
-  console.log(detalhe)
-  console.log(lista[detalhe])
+  // console.log(detalhe)
+  // console.log(lista[detalhe])
 
   if(detalhe && lista[detalhe] && lista[detalhe].opcao.length > 0){
     axios.get(`http://35.171.122.245:83/chamada/${from}/${lista[detalhe].to}/${user}/${domain}/${callid}/${method}/${lista[detalhe].opcao.join('.')}`)
