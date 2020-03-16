@@ -5,18 +5,23 @@ const api = axios.create({
 })
 
 let lista = {}
+let lastCallId = ''
 
 connector.on('create', chamada => {
-  if(!lista[chamada.callid]){
-    const result = api.get(`/api/basix/domain/${chamada.to}`)
-    result.then(data => {
-      // lista[chamada.callid].domain = data.domain
-      console.log(data)
-    })
-    
-    lista[chamada.callid] = {
-      from: chamada.from,
-      to: chamada.to,
+  if(lastCallId !== chamada.callid){
+    lastCallId = chamada.callid
+
+    if(!lista[chamada.callid]){
+      const result = api.get(`/api/basix/domain/${chamada.to}`)
+      result.then(data => {
+        // lista[chamada.callid].domain = data.domain
+        console.log(data)
+      })
+      
+      lista[chamada.callid] = {
+        from: chamada.from,
+        to: chamada.to,
+      }
     }
   }
 })
