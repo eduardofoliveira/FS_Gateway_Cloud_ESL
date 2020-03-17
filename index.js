@@ -27,7 +27,7 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
   if(detalhe && lista[detalhe] && lista[detalhe].opcao.length > 0){
     axios.get(`http://35.171.122.245:83/chamada/${from}/${lista[detalhe].to}/${user}/${domain}/${callid}/${method}/${lista[detalhe].opcao.join('.')}`)
   }else{
-    axios.get(`http://35.171.122.245:83/chamada/${from}/${to}/${user}/${domain}/${callid}/${method}`)
+    axios.get(`http://35.171.122.245:83/chamada/${from}/${lista[detalhe].to}/${user}/${domain}/${callid}/${method}`)
   }
 
   res.send()
