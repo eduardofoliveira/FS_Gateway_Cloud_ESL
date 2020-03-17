@@ -23,6 +23,10 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
     return res.send()
   }
 
+  if(user.indexOf('IVR') > 0){
+    return res.send()
+  }
+
   // console.log(from, user, domain, callid, method)
   // console.log(to)
   // console.log(detalhe)
@@ -63,7 +67,7 @@ app.get(`/ura/:from/:to/:opcao/:domain`, (req, res) => {
   res.send()
 })
 
-app.get('status', (req, res) => {
+app.get('/status', (req, res) => {
   res.json(lista)
 })
 
