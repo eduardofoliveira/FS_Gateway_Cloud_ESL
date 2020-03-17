@@ -23,7 +23,7 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
     return res.send()
   }
 
-  if(user.indexOf('IVR') > 0){
+  if(user.indexOf('IVR') >= 0){
     return res.send()
   }
 
