@@ -19,6 +19,10 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
     lista[detalhe].callid_basix = callid
   }
 
+  if(!detalhe){
+    return res.send()
+  }
+
   // console.log(from, user, domain, callid, method)
   // console.log(to)
   // console.log(detalhe)
