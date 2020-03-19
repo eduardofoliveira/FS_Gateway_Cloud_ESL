@@ -35,7 +35,7 @@ let doConnect = () => {
 
         setTimeout(() => {
           em.emit('hangup', chamada)
-        }, 15000)
+        }, 7000)
     });
 
     conn.on("error", error => {
