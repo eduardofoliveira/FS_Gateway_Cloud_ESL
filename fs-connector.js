@@ -16,8 +16,10 @@ let doConnect = () => {
       let eventName = evento.getHeader("Event-Name")
       let from = evento.getHeader("Caller-Caller-ID-Number")
       let to = evento.getHeader("Caller-Destination-Number")
+      let direction = evento.getHeader("Call-Direction")
+      let fromIP = evento.getHeader("Caller-Network-Addr")
       
-      if(from === '11961197559'){
+      if(from === '11961197559' && direction === 'outbound' && fromIP === '54.233.223.179'){
         console.log(callid, eventName, from, to)
       }
       
