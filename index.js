@@ -102,5 +102,6 @@ connector.on('create', chamada => {
 })
 
 connector.on('hangup', chamada => {
+  console.log(chamada.callid)
   delete lista[chamada.callid]
 })
