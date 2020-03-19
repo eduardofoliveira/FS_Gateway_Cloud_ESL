@@ -27,11 +27,6 @@ let doConnect = () => {
     });
 
     conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", evento => {
-      if (
-        evento.getHeader("Call-Direction") === "outbound" &&
-        evento.getHeader("Caller-Network-Addr") == "54.233.223.179"
-        ) {
-
         const chamada = {
           callid: evento.getHeader("Channel-Call-UUID"),
           from: evento.getHeader("Caller-Caller-ID-Number"),
@@ -41,7 +36,6 @@ let doConnect = () => {
         setTimeout(() => {
           em.emit('hangup', chamada)
         }, 10000)
-      }
     });
 
     conn.on("error", error => {
