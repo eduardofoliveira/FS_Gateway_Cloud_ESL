@@ -11,11 +11,16 @@ let doConnect = () => {
     conn.subscribe(["CHANNEL_CREATE", "CHANNEL_HANGUP_COMPLETE", "disconnect"]);
 
     conn.on('esl::event::**', evento => {
+      
       let callid = evento.getHeader("Channel-Call-UUID")
       let eventName = evento.getHeader("Event-Name")
       let from = evento.getHeader("Caller-Caller-ID-Number")
       let to = evento.getHeader("Caller-Destination-Number")
-      console.log(callid, eventName, from, to)
+      
+      if(from === '11961197559'){
+        console.log(callid, eventName, from, to)
+      }
+      
     })
 
     conn.on("esl::event::CHANNEL_CREATE::*", evento => {
