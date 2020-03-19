@@ -27,13 +27,21 @@ let doConnect = () => {
     });
 
     conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", evento => {
-      const chamada = {
-        callid: evento.getHeader("Channel-Call-UUID"),
-        from: evento.getHeader("Caller-Caller-ID-Number"),
-        to: evento.getHeader("Caller-Destination-Number")
-      };
+      if (
+        evento.getHeader("Call-Direction") === "outbound" &&
+        evento.getHeader("Caller-Network-Addr") == "54.233.223.179"
+        ) {
 
-      em.emit('hangup', chamada)
+        const chamada = {
+          callid: evento.getHeader("Channel-Call-UUID"),
+          from: evento.getHeader("Caller-Caller-ID-Number"),
+          to: evento.getHeader("Caller-Destination-Number")
+        };
+
+        setTimeout(() => {
+          em.emit('hangup', chamada)
+        }, 10000)
+      }
     });
 
     conn.on("error", error => {

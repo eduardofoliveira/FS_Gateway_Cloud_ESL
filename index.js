@@ -102,7 +102,5 @@ connector.on('create', chamada => {
 })
 
 connector.on('hangup', chamada => {
-  // setTimeout(() => {
-  //   delete lista[chamada.callid]
-  // }, 5000)
+  delete lista[chamada.callid]
 })
