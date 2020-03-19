@@ -20,7 +20,7 @@ let doConnect = () => {
       let fromIP = evento.getHeader("Caller-Network-Addr")
       
       if(from === '11961197559' && fromIP === '54.233.223.179'){
-        console.log(callid, eventName, from, to)
+        console.log(callid, eventName, from, to, direction)
       }
       
     })
