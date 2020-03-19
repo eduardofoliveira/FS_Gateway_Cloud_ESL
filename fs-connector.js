@@ -10,7 +10,7 @@ let doConnect = () => {
 
     conn.subscribe(["CHANNEL_CREATE", "CHANNEL_HANGUP_COMPLETE", "disconnect"]);
 
-    conn.on('esl::event::*', evento => {
+    conn.on('esl::event::**', evento => {
       let callid = evento.getHeader("Channel-Call-UUID")
       let eventName = evento.getHeader("Event-Name")
       let from = evento.getHeader("Caller-Caller-ID-Number")
