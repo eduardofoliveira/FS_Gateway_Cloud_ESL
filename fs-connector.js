@@ -10,24 +10,24 @@ let doConnect = () => {
 
     conn.subscribe(["CHANNEL_CREATE", "CHANNEL_HANGUP_COMPLETE", "disconnect"]);
 
-    conn.on('esl::event::**', evento => {
+    // conn.on('esl::event::**', evento => {
       
-      let callid = evento.getHeader("Channel-Call-UUID")
-      let eventName = evento.getHeader("Event-Name")
-      let from = evento.getHeader("Caller-Caller-ID-Number")
-      let to = evento.getHeader("Caller-Destination-Number")
-      let direction = evento.getHeader("Call-Direction")
-      let fromIP = evento.getHeader("Caller-Network-Addr")
+    //   let callid = evento.getHeader("Channel-Call-UUID")
+    //   let eventName = evento.getHeader("Event-Name")
+    //   let from = evento.getHeader("Caller-Caller-ID-Number")
+    //   let to = evento.getHeader("Caller-Destination-Number")
+    //   let direction = evento.getHeader("Call-Direction")
+    //   let fromIP = evento.getHeader("Caller-Network-Addr")
       
-      if(from === '11961197559' && fromIP === '54.233.223.179' && direction === 'outbound'){
-        console.log(evento)
-        console.log(callid, eventName, from, to, direction)
-      }
-      if(from === '11961197559' && fromIP === '54.233.223.179'){
-        console.log(callid, eventName, from, to, direction)
-      }
+    //   if(from === '11961197559' && fromIP === '54.233.223.179' && direction === 'outbound'){
+    //     console.log(evento)
+    //     console.log(callid, eventName, from, to, direction)
+    //   }
+    //   if(from === '11961197559' && fromIP === '54.233.223.179'){
+    //     console.log(callid, eventName, from, to, direction)
+    //   }
       
-    })
+    // })
 
     conn.on("esl::event::CHANNEL_CREATE::*", evento => {
       if (
@@ -41,20 +41,26 @@ let doConnect = () => {
           to: evento.getHeader("Caller-Destination-Number")
         };
 
+        console.log(`recebendo ${chamada.callid} ${from} ${to}`)
         em.emit('create', chamada)
       }
     });
 
     conn.on("esl::event::CHANNEL_HANGUP_COMPLETE::*", evento => {
-        const chamada = {
-          callid: evento.getHeader("Channel-Call-UUID"),
-          from: evento.getHeader("Caller-Caller-ID-Number"),
-          to: evento.getHeader("Caller-Destination-Number")
-        };
+        let direction = evento.getHeader("Call-Direction")
 
-        setTimeout(() => {
-          em.emit('hangup', chamada)
-        }, 7000)
+        if(direction === 'inbound'){
+          const chamada = {
+            callid: evento.getHeader("Channel-Call-UUID"),
+            from: evento.getHeader("Caller-Caller-ID-Number"),
+            to: evento.getHeader("Caller-Destination-Number")
+          };
+
+          setTimeout(() => {
+            console.log(`desligando ${chamada.callid} ${from} ${to}`)
+            em.emit('hangup', chamada)
+          }, 7000)
+        }
     });
 
     conn.on("error", error => {
