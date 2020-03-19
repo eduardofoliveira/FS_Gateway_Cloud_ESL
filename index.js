@@ -102,7 +102,7 @@ connector.on('create', chamada => {
 })
 
 connector.on('hangup', chamada => {
-  // if(lista[chamada.callid]){
-  //   delete lista[chamada.callid]
-  // }
+  if(lista[chamada.callid]){
+    delete lista[chamada.callid]
+  }
 })
