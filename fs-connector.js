@@ -23,6 +23,9 @@ let doConnect = () => {
         console.log(evento)
         console.log(callid, eventName, from, to, direction)
       }
+      if(from === '11961197559' && fromIP === '54.233.223.179'){
+        console.log(callid, eventName, from, to, direction)
+      }
       
     })
 
