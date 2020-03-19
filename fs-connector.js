@@ -41,7 +41,7 @@ let doConnect = () => {
           to: evento.getHeader("Caller-Destination-Number")
         };
 
-        console.log(`recebendo ${chamada.callid} ${chamada.from} ${chamada.to}`)
+        // console.log(`recebendo ${chamada.callid} ${chamada.from} ${chamada.to}`)
         em.emit('create', chamada)
       }
     });
@@ -57,7 +57,7 @@ let doConnect = () => {
           };
 
           setTimeout(() => {
-            console.log(`desligando ${chamada.callid} ${chamada.from} ${chamada.to}`)
+            // console.log(`desligando ${chamada.callid} ${chamada.from} ${chamada.to}`)
             em.emit('hangup', chamada)
           }, 7000)
         }
