@@ -14,7 +14,9 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
     return false
   })
 
+  console.log(from, domain)
   console.log(`Detalhe: ${detalhe}`)
+  console.log(lista)
 
   if(detalhe){
     to = lista[detalhe].to
