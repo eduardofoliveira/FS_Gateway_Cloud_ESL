@@ -14,6 +14,8 @@ app.get(`/chamada/:from/:to/:user/:domain/:callid/:method`, (req, res) => {
     return false
   })
 
+  console.log(`Detalhe: ${detalhe}`)
+
   if(detalhe){
     to = lista[detalhe].to
     lista[detalhe].callid_basix = callid
